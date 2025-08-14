@@ -1,7 +1,9 @@
+/* File: resources/css/app.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Gaya untuk rating bintang (dari sistem ulasan) */
 .star-rating .star {
     cursor: pointer;
     transition: color 0.2s;
@@ -9,4 +11,55 @@
 .star-rating .star:hover,
 .star-rating .star.active {
     color: #facc15; /* Kuning untuk bintang aktif */
+}
+
+/* Gaya untuk landing page */
+.hero-section {
+    background: linear-gradient(
+        to right,
+        #f9fafb,
+        #f3f4f6
+    ); /* Gradasi putih-abu-abu */
+    padding: 3rem 1rem;
+    text-align: center;
+}
+.hero-section h1 {
+    font-size: 2.25rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.hero-section p {
+    font-size: 1.125rem;
+    margin: 1rem 0;
+}
+.cta-button {
+    background-color: #dc2626; /* Merah Mie Mapan */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.cta-button:hover {
+    background-color: #b91c1c; /* Merah lebih gelap */
+    transform: translateY(-2px);
+}
+.feature-card {
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+.feature-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+@media (max-width: 640px) {
+    .hero-section h1 {
+        font-size: 1.875rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
 }
