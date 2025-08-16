@@ -18,7 +18,7 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-4">
                     <span class="text-red-600 font-bold text-2xl">MIE MAPAN</span>
-                    <span class="text-gray-600">Pontianak</span>
+                    <span class="text-gray-600">Ponti</span>
                 </div>
 
                 <!-- Desktop Menu -->
