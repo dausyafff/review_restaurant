@@ -1,4 +1,3 @@
-```php
 <!-- File: resources/views/menu.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
@@ -22,13 +21,20 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <ul class="flex space-x-8">
-                        <li><a href="/" class="text-gray-600 hover:text-red-600">Beranda</a></li>
-                        <li><a href="/menu" class="text-red-600 font-medium">Menu</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-red-600">Tentang Kami</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-red-600">Kontak</a></li>
+                        <li><a href="/" class="nav-link text-gray-600 hover:text-red-600">Beranda</a></li>
+                        <li class="dropdown relative">
+                            <a href="/menu" class="nav-link text-red-600 font-medium">Menu <i
+                                    class="fas fa-chevron-down ml-1"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/menu#mie" class="dropdown-item">Mie</a></li>
+                                <li><a href="/menu#penyet" class="dropdown-item">Penyet</a></li>
+                                <li><a href="/menu#minuman" class="dropdown-item">Minuman</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="nav-link text-gray-600 hover:text-red-600">Tentang Kami</a></li>
+                        <li><a href="#" class="nav-link text-gray-600 hover:text-red-600">Kontak</a></li>
                     </ul>
-                    <a href="/reviews" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Beri
-                        Ulasan</a>
+                    <a href="/reviews" class="cta-button">Beri Ulasan</a>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button class="mobile-menu-button outline-none">
@@ -42,7 +48,16 @@
             <div class="mobile-menu hidden md:hidden">
                 <ul class="flex flex-col mt-4 space-y-2">
                     <li><a href="/" class="block px-2 py-1 text-gray-600 hover:bg-gray-100">Beranda</a></li>
-                    <li><a href="/menu" class="block px-2 py-1 text-red-600 font-medium">Menu</a></li>
+                    <li>
+                        <a href="/menu" class="block px-2 py-1 text-red-600 font-medium">Menu</a>
+                        <ul class="pl-4 space-y-1">
+                            <li><a href="/menu#mie" class="block px-2 py-1 text-gray-600 hover:bg-gray-100">Mie</a></li>
+                            <li><a href="/menu#penyet"
+                                    class="block px-2 py-1 text-gray-600 hover:bg-gray-100">Penyet</a></li>
+                            <li><a href="/menu#minuman"
+                                    class="block px-2 py-1 text-gray-600 hover:bg-gray-100">Minuman</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#" class="block px-2 py-1 text-gray-600 hover:bg-gray-100">Tentang Kami</a></li>
                     <li><a href="#" class="block px-2 py-1 text-gray-600 hover:bg-gray-100">Kontak</a></li>
                     <li><a href="/reviews" class="block px-2 py-1 text-red-600 font-medium">Beri Ulasan</a></li>
@@ -55,44 +70,53 @@
     <section class="py-12">
         <div class="container mx-auto px-6">
             <h1 class="text-2xl font-bold text-gray-800 mb-8 text-center">Menu Mie Mapan Ponti</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Mie -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Mie Ayam</h2>
-                    <p class="text-gray-600 mb-4">Mie kenyal dengan topping ayam kecap dan kuah kaldu lezat.</p>
-                    <p class="text-red-600 font-bold">Rp 25.000</p>
+            <div id="mie" class="mb-12">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Mie</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-card">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Mie Ayam</h3>
+                        <p class="text-gray-600 mb-4">Mie kenyal dengan topping ayam kecap dan kuah kaldu lezat.</p>
+                        <p class="text-red-600 font-bold">Rp 25.000</p>
+                    </div>
+                    <div class="menu-card">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Mie Pangsit</h3>
+                        <p class="text-gray-600 mb-4">Mie dengan pangsit goreng renyah dan kuah hangat.</p>
+                        <p class="text-red-600 font-bold">Rp 28.000</p>
+                    </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Mie Pangsit</h2>
-                    <p class="text-gray-600 mb-4">Mie dengan pangsit goreng renyah dan kuah hangat.</p>
-                    <p class="text-red-600 font-bold">Rp 28.000</p>
+            </div>
+            <div id="penyet" class="mb-12">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Penyet</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-card">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Ayam Penyet</h3>
+                        <p class="text-gray-600 mb-4">Ayam goreng crispy dengan sambal pedas khas.</p>
+                        <p class="text-red-600 font-bold">Rp 30.000</p>
+                    </div>
+                    <div class="menu-card">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Ikan Penyet</h3>
+                        <p class="text-gray-600 mb-4">Ikan goreng dengan sambal terasi yang menggugah selera.</p>
+                        <p class="text-red-600 font-bold">Rp 35.000</p>
+                    </div>
                 </div>
-                <!-- Penyet -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Ayam Penyet</h2>
-                    <p class="text-gray-600 mb-4">Ayam goreng crispy dengan sambal pedas khas.</p>
-                    <p class="text-red-600 font-bold">Rp 30.000</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Ikan Penyet</h2>
-                    <p class="text-gray-600 mb-4">Ikan goreng dengan sambal terasi yang menggugah selera.</p>
-                    <p class="text-red-600 font-bold">Rp 35.000</p>
-                </div>
-                <!-- Minuman -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Es Teh Manis</h2>
-                    <p class="text-gray-600 mb-4">Teh manis dingin yang menyegarkan.</p>
-                    <p class="text-red-600 font-bold">Rp 10.000</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Jus Jeruk</h2>
-                    <p class="text-gray-600 mb-4">Jus jeruk segar tanpa gula tambahan.</p>
-                    <p class="text-red-600 font-bold">Rp 15.000</p>
+            </div>
+            <div id="minuman">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Minuman</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-card">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Es Teh Manis</h3>
+                        <p class="text-gray-600 mb-4">Teh manis dingin yang menyegarkan.</p>
+                        <p class="text-red-600 font-bold">Rp 10.000</p>
+                    </div>
+                    <div class="menu-card">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Jus Jeruk</h3>
+                        <p class="text-gray-600 mb-4">Jus jeruk segar tanpa gula tambahan.</p>
+                        <p class="text-red-600 font-bold">Rp 15.000</p>
+                    </div>
                 </div>
             </div>
             <div class="text-center mt-8">
-                <a href="/reviews" class="cta-button bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700">Beri
-                    Ulasan</a>
+                <a href="/reviews" class="cta-button">Beri Ulasan</a>
             </div>
         </div>
     </section>
@@ -112,8 +136,8 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-bold mb-4">Kontak</h3>
-                    <p class="text-gray-400 mb-2"><i class="fas fa-map-marker-alt mr-2"></i> Pontianak, Kalimantan Barat
-                    </p>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-map-marker-alt mr-2"></i> Pontianak, Kalimantan
+                        Barat</p>
                     <p class="text-gray-400"><i class="fas fa-phone mr-2"></i> +62 812-3456-7890</p>
                 </div>
             </div>
@@ -125,4 +149,3 @@
 </body>
 
 </html>
-```
