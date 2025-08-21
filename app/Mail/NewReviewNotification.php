@@ -23,7 +23,7 @@ class NewReviewNotification extends Mailable
         return $this->subject('Ulasan Baru di Mie Mapan Ponti')
             ->view('emails.review_notification')
             ->with([
-                'name' => $this->review->name ?? 'Anonim',
+                'name' => $this->review->name, // Nama sudah diatur sebagai "Pelanggan" di controller
                 'rating' => $this->review->rating,
                 'comment' => $this->review->comment,
             ]);

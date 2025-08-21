@@ -29,7 +29,9 @@ class ReviewController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $review = Review::create($validator->validated());
+        $data = $validator->validated();
+        $data['name'] = $data['name'] ?? 'Pelanggan'; // Default ke "Pelanggan" jika nama kosong
+        $review = Review::create($data);
 
         // Kirim notifikasi email
         Mail::to('admin@miemapanponti.com')->send(new NewReviewNotification($review));
