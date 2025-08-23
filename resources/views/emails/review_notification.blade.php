@@ -35,20 +35,25 @@
             font-size: 14px;
             margin-top: 20px;
         }
+
+        .emoji {
+            font-size: 24px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-            <h1>Ulasan Baru di Mie Mapan Ponti</h1>
+            <h1>Ulasan Baru di Mie Mapan Ponti 🍜</h1>
         </div>
         <div class="content">
-            <p><strong>Nama:</strong> {{ $name }}</p>
+            <p><strong>Nama:</strong> {{ $name }} 😊</p>
             <p><strong>Rating:</strong> {{ str_repeat('★', $rating) }}{{ str_repeat('☆', 5 - $rating) }}</p>
             <p><strong>Komentar:</strong> {{ $comment }}</p>
         </div>
         <div class="footer">
+            <p>Terima kasih atas dukungan Anda untuk Mie Mapan Ponti!</p>
             <p>&copy; 2025 Mie Mapan Ponti. Semua hak dilindungi.</p>
         </div>
     </div>

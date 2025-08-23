@@ -112,6 +112,20 @@
     color: #dc2626;
 }
 
+/* Popup notifikasi */
+#successPopup {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s, transform 0.3s;
+}
+#successPopup.show {
+    opacity: 1;
+    transform: scale(1);
+}
+#successPopup .cta-button {
+    padding: 0.5rem 1rem;
+}
+
 /* Animasi fade-in */
 @keyframes fadeIn {
     from {
@@ -129,5 +143,8 @@
     }
     .hero-section p {
         font-size: 1rem;
+    }
+    #successPopup .max-w-sm {
+        max-width: 90%;
     }
 }

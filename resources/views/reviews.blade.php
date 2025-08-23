@@ -12,13 +12,12 @@
 </head>
 
 <body class="bg-gray-100 font-sans">
-    <!-- Navbar -->
     <nav class="bg-white shadow-lg">
         <div class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
                     <span class="text-red-600 font-bold text-2xl">MIE MAPAN</span>
-                    <span class="text-gray-600">Pontianak</span>
+                    <span class="text-gray-600">Ponti</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <ul class="flex space-x-8">
@@ -67,7 +66,6 @@
         </div>
     </nav>
 
-    <!-- Formulir Ulasan -->
     <section class="py-12">
         <div class="container mx-auto px-6">
             <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
@@ -76,7 +74,8 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">Nama (opsional)</label>
                         <input type="text" id="name" name="name"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500">
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                            placeholder="Masukkan nama Anda atau biarkan kosong">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Rating</label>
@@ -92,17 +91,34 @@
                     <div>
                         <label for="comment" class="block text-sm font-medium text-gray-700">Komentar</label>
                         <textarea id="comment" name="comment" rows="4"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"></textarea>
-                        <p id="comment-error" class="text-red-500 text-sm mt-1 hidden">Komentar wajib diisi untuk rating
-                            di bawah 3 bintang.</p>
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                            placeholder="Bagikan pengalaman Anda di Mie Mapan Ponti"></textarea>
+                        <p id="comment-error" class="text-red-500 text-sm mt-1 hidden">Mohon tulis komentar untuk rating
+                            di bawah 3 bintang 😊</p>
                     </div>
-                    <button type="submit" class="cta-button">Kirim Ulasan</button>
+                    <button type="submit" id="submitButton" class="cta-button">
+                        <span id="buttonText">Kirim Ulasan</span>
+                        <span id="loadingSpinner" class="hidden animate-spin h-5 w-5 mr-2 inline-block">
+                            <svg class="text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 12a8 8 0 0116 0" />
+                            </svg>
+                        </span>
+                    </button>
                 </form>
+                <div id="successPopup"
+                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                    <div class="bg-white rounded-lg p-6 max-w-sm w-full text-center shadow-lg">
+                        <div class="text-4xl mb-4">😊🍜</div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Terima Kasih!</h2>
+                        <p class="text-gray-600 mb-6">Ulasan Anda sangat berarti bagi kami di Mie Mapan Ponti!</p>
+                        <button id="closePopup" class="cta-button bg-red-600 text-white">Tutup</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Grafik Distribusi Rating -->
     <section class="py-12 bg-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Distribusi Rating</h2>
@@ -112,7 +128,6 @@
         </div>
     </section>
 
-    <!-- Daftar Ulasan -->
     <section class="py-12">
         <div class="container mx-auto px-6">
             <div class="bg-white rounded-lg shadow-lg p-6">

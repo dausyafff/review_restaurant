@@ -1,7 +1,6 @@
 
 // File: resources/js/app.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Toggle menu mobile
     const btn = document.querySelector(".mobile-menu-button");
     const menu = document.querySelector(".mobile-menu");
     if (btn && menu) {
@@ -10,13 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Animasi fade-in untuk elemen dengan kelas tertentu
     const fadeElements = document.querySelectorAll('.hero-section, .feature-card, .review-card, .menu-card');
     fadeElements.forEach((el, index) => {
         el.style.animationDelay = `${index * 0.1}s`;
     });
 
-    // Fungsi untuk halaman ulasan
     const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
     const commentInput = document.getElementById('comment');
@@ -24,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewForm = document.getElementById('reviewForm');
     const reviewList = document.getElementById('reviewList');
     const averageRating = document.getElementById('averageRating');
+    const successPopup = document.getElementById('successPopup');
+    const closePopup = document.getElementById('closePopup');
+    const submitButton = document.getElementById('submitButton');
+    const buttonText = document.getElementById('buttonText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
 
     if (stars.length && reviewForm) {
         stars.forEach(star => {
@@ -42,38 +44,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
         reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (submitButton && buttonText && loadingSpinner) {
+                submitButton.disabled = true;
+                buttonText.classList.add('hidden');
+                loadingSpinner.classList.remove('hidden');
+            }
+
             const formData = new FormData(reviewForm);
             const data = {
-                name: formData.get('name'),
+                name: formData.get('name') || 'Pelanggan',
                 rating: parseInt(formData.get('rating')),
                 comment: formData.get('comment'),
             };
 
             if (data.rating < 3 && !data.comment.trim()) {
                 commentError.classList.remove('hidden');
+                if (submitButton && buttonText && loadingSpinner) {
+                    submitButton.disabled = false;
+                    buttonText.classList.remove('hidden');
+                    loadingSpinner.classList.add('hidden');
+                }
                 return;
             }
 
             try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
                 const response = await fetch('/api/reviews', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
+                    signal: controller.signal,
                 });
+                clearTimeout(timeoutId);
 
                 if (response.ok) {
                     reviewForm.reset();
                     stars.forEach(s => s.classList.remove('active'));
+                    commentError.classList.add('hidden');
                     loadReviews();
                     loadRatingChart();
+                    if (successPopup) {
+                        successPopup.classList.remove('hidden');
+                        successPopup.classList.add('show');
+                    }
                 } else {
                     const errors = await response.json();
-                    alert('Error: ' + JSON.stringify(errors));
+                    alert(`Error: ${errors.errors ? Object.values(errors.errors).join(', ') : 'Terjadi kesalahan'}`);
                 }
             } catch (error) {
-                alert('Terjadi kesalahan. Coba lagi nanti.');
+                alert('Koneksi lambat atau gagal. Coba lagi nanti.');
+            } finally {
+                if (submitButton && buttonText && loadingSpinner) {
+                    submitButton.disabled = false;
+                    buttonText.classList.remove('hidden');
+                    loadingSpinner.classList.add('hidden');
+                }
             }
         });
+
+        if (closePopup && successPopup) {
+            closePopup.addEventListener('click', () => {
+                successPopup.classList.remove('show');
+                setTimeout(() => successPopup.classList.add('hidden'), 300);
+            });
+        }
 
         async function loadReviews() {
             try {
@@ -143,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Fungsi untuk preview ulasan di landing page
     const reviewPreview = document.getElementById('reviewPreview');
     const averageRatingPreview = document.getElementById('averageRatingPreview');
     if (reviewPreview && averageRatingPreview) {
