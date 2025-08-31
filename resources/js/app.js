@@ -1,6 +1,7 @@
 
 // File: resources/js/app.js
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile Menu Toggle
     const btn = document.querySelector(".mobile-menu-button");
     const menu = document.querySelector(".mobile-menu");
     if (btn && menu) {
@@ -9,14 +10,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Fade Animation for Elements
     const fadeElements = document.querySelectorAll('.hero-section, .feature-card, .review-card, .menu-card');
     fadeElements.forEach((el, index) => {
         el.style.animationDelay = `${index * 0.1}s`;
     });
 
+    // Slideshow Hero Section
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    if (slides.length) {
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        showSlide(currentSlide);
+        setInterval(nextSlide, 5000); // Ganti slide setiap 5 detik
+    }
+
+    // Form Ulasan
     const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
-    const commentInput = document.getElementById('comment');
+    const commentInput =Aircraft document.getElementById('comment');
     const commentError = document.getElementById('comment-error');
     const reviewForm = document.getElementById('reviewForm');
     const reviewList = document.getElementById('reviewList');
@@ -26,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitButton = document.getElementById('submitButton');
     const buttonText = document.getElementById('buttonText');
     const loadingSpinner = document.getElementById('loadingSpinner');
+    const discountCodeElement = document.getElementById('discountCode');
 
     if (stars.length && reviewForm) {
         stars.forEach(star => {
@@ -79,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearTimeout(timeoutId);
 
                 if (response.ok) {
+                    const result = await response.json();
                     reviewForm.reset();
                     stars.forEach(s => s.classList.remove('active'));
                     commentError.classList.add('hidden');
@@ -87,6 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (successPopup) {
                         successPopup.classList.remove('hidden');
                         successPopup.classList.add('show');
+                        if (discountCodeElement) {
+                            discountCodeElement.textContent = result.discount_code;
+                        }
                     }
                 } else {
                     const errors = await response.json();
@@ -178,6 +203,71 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Form Kontak
+    const contactForm = document.getElementById('contactForm');
+    const submitContactButton = document.getElementById('submitContactButton');
+    const contactButtonText = document.getElementById('contactButtonText');
+    const contactLoadingSpinner = document.getElementById('contactLoadingSpinner');
+    const contactSuccessPopup = document.getElementById('contactSuccessPopup');
+    const closeContactPopup = document.getElementById('closeContactPopup');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (submitContactButton && contactButtonText && contactLoadingSpinner) {
+                submitContactButton.disabled = true;
+                contactButtonText.classList.add('hidden');
+                contactLoadingSpinner.classList.remove('hidden');
+            }
+
+            const formData = new FormData(contactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message'),
+            };
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                    signal: controller.signal,
+                });
+                clearTimeout(timeoutId);
+
+                if (response.ok) {
+                    contactForm.reset();
+                    if (contactSuccessPopup) {
+                        contactSuccessPopup.classList.remove('hidden');
+                        contactSuccessPopup.classList.add('show');
+                    }
+                } else {
+                    const errors = await response.json();
+                    alert(`Error: ${errors.errors ? Object.values(errors.errors).join(', ') : 'Terjadi kesalahan'}`);
+                }
+            } catch (error) {
+                alert('Koneksi lambat atau gagal. Coba lagi nanti.');
+            } finally {
+                if (submitContactButton && contactButtonText && contactLoadingSpinner) {
+                    submitContactButton.disabled = false;
+                    contactButtonText.classList.remove('hidden');
+                    contactLoadingSpinner.classList.add('hidden');
+                }
+            }
+        });
+
+        if (closeContactPopup && contactSuccessPopup) {
+            closeContactPopup.addEventListener('click', () => {
+                contactSuccessPopup.classList.remove('show');
+                setTimeout(() => contactSuccessPopup.classList.add('hidden'), 300);
+            });
+        }
+    }
+
+    // Review Preview
     const reviewPreview = document.getElementById('reviewPreview');
     const averageRatingPreview = document.getElementById('averageRatingPreview');
     if (reviewPreview && averageRatingPreview) {
