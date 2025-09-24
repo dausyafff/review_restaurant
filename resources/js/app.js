@@ -1,4 +1,3 @@
-
 // File: resources/js/app.js
 document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Form Ulasan
     const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
-    const commentInput =Aircraft document.getElementById('comment');
+    const commentInput = document.getElementById('comment');
     const commentError = document.getElementById('comment-error');
     const reviewForm = document.getElementById('reviewForm');
     const reviewList = document.getElementById('reviewList');
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitButton = document.getElementById('submitButton');
     const buttonText = document.getElementById('buttonText');
     const loadingSpinner = document.getElementById('loadingSpinner');
-    const discountCodeElement = document.getElementById('discountCode');
 
     if (stars.length && reviewForm) {
         stars.forEach(star => {
@@ -100,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearTimeout(timeoutId);
 
                 if (response.ok) {
-                    const result = await response.json();
                     reviewForm.reset();
                     stars.forEach(s => s.classList.remove('active'));
                     commentError.classList.add('hidden');
@@ -109,9 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (successPopup) {
                         successPopup.classList.remove('hidden');
                         successPopup.classList.add('show');
-                        if (discountCodeElement) {
-                            discountCodeElement.textContent = result.discount_code;
-                        }
                     }
                 } else {
                     const errors = await response.json();

@@ -16,7 +16,7 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
                     <span class="text-red-600 font-bold text-2xl">MIE MAPAN</span>
-                    <span class="text-gray-600">Pontianak</span>
+                    <span class="text-gray-600">Ponti</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <ul class="flex space-x-8">
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="slide fade">
-                <img src="/images/slide2.jpg" alt="Penyet Favorit" class="w-full h-96 object-cover">
+                <img src="/miemapanponti.jpeg" alt="Penyet Favorit" class="w-full h-96 object-cover">
                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <h2 class="text-4xl font-bold text-white">Coba Penyet Favorit Kami</h2>
                 </div>

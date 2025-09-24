@@ -32,7 +32,7 @@
                             </ul>
                         </li>
                         <li><a href="#" class="nav-link text-gray-600 hover:text-red-600">Tentang Kami</a></li>
-                        <li><a href="#" class="nav-link text-gray-600 hover:text-red-600">Kontak</a></li>
+                        <li><a href="/about" class="nav-link text-gray-600 hover:text-red-600">Kontak</a></li>
                     </ul>
                     <a href="/reviews" class="cta-button">Beri Ulasan</a>
                 </div>
